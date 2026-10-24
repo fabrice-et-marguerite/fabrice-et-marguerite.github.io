@@ -21,6 +21,27 @@
   var sari = section.querySelector('[data-sari]');
   section.classList.add('rencontre--active');
 
+  // Autour des mariés : halo, couronne de cœurs flottants et pétales de jasmin (positions dans style.css).
+  var COEUR = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5'
+    + 'c2.1 0 3.6 1.2 4.3 2.6.7-1.4 2.2-2.6 4.3-2.6 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+  var creer = function (classe, parent, html) {
+    var el = document.createElement('span');
+    el.className = classe;
+    el.setAttribute('aria-hidden', 'true');
+    if (html) el.innerHTML = html;
+    parent.appendChild(el);
+    return el;
+  };
+  var halo = creer('rencontre__halo', scene);
+  var autour = creer('rencontre__autour', scene);
+  var flottants = [];
+  for (var c = 0; c < 11; c++) {
+    // L'enveloppe apparaît au défilement ; le cœur intérieur se balance en continu (animation CSS).
+    flottants.push(creer('rencontre__flottant', autour, '<span class="rencontre__flottant-coeur">' + COEUR + '</span>'));
+  }
+  var pluie = creer('rencontre__pluie', scene);
+  for (var q = 0; q < 12; q++) creer('rencontre__petale', pluie);
+
   // Mesures prises sur les images (scripts/preparer-rencontre.py), en fraction de la hauteur H de la pose à deux :
   // tête de Fabrice et de Marguerite dans la pose « ensemble », par rapport au centre de l'image.
   var TETE_F_ENSEMBLE = -0.117;
@@ -84,6 +105,21 @@
     invite.style.opacity = 1 - lisse(0.02, 0.1, p);
 
     // 4. Petits cœurs dorés qui s'envolent pendant la pose du cœur.
+    // 5. Autour des mariés : le halo et les cœurs flottants arrivent un à un quand ils se rejoignent ;
+    //    les pétales tombent pendant le cœur final. Les balancements ne tournent que lorsqu'ils sont visibles.
+    var reunis = lisse(0.55, 0.7, p);
+    halo.style.opacity = reunis * (0.75 + 0.25 * enCoeur);
+    halo.style.transform = 'translateX(-50%) scale(' + entre(0.7, 1.08, reunis) + ')';
+    for (var f = 0; f < flottants.length; f++) {
+      var arrivee = lisse(0.56 + f * 0.012, 0.64 + f * 0.012, p);
+      flottants[f].style.opacity = arrivee;
+      flottants[f].style.transform = 'scale(' + entre(0.3, 1, arrivee) + ')';
+    }
+    pluie.style.opacity = lisse(0.8, 0.9, p);
+    var visible = r.bottom > 0 && r.top < window.innerHeight;
+    section.classList.toggle('rencontre--reunis', visible && reunis > 0);
+    section.classList.toggle('rencontre--pluie', visible && p > 0.8);
+
     for (var k = 0; k < coeurs.length; k++) {
       var depart = 0.84 + k * 0.025;
       var t = lisse(depart, depart + 0.14, p);
