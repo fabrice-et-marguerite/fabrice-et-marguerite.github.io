@@ -123,8 +123,8 @@
       'Fabrice et Marguerite dans un cœur de ballons rouges': 'Fabrice and Marguerite in a heart of red balloons',
       'Tirage noir et blanc du couple, posé parmi des fleurs blanches': 'Black and white print of the couple among white flowers',
       'Fabrice et Marguerite devant la ville au coucher du soleil': 'Fabrice and Marguerite in front of the city at sunset',
-      'Fabrice et Marguerite assis devant des drapés roses et bleus, des guirlandes de jasmin et leur monogramme F et M':
-        'Fabrice and Marguerite seated before pink and blue drapes, jasmine garlands and their F and M monogram',
+      'Fabrice et Marguerite debout devant des drapés roses et bleus, des guirlandes de jasmin et leur monogramme F et M':
+        'Fabrice and Marguerite standing before pink and blue drapes, jasmine garlands and their F and M monogram',
       'Fabrice, sourire tourné vers Marguerite': 'Fabrice, smiling at Marguerite',
       'Marguerite, jasmin dans les cheveux, sourire tourné vers Fabrice': 'Marguerite, jasmine in her hair, smiling at Fabrice',
       'Bougies et roses sur la table': 'Candles and roses on the table',
@@ -242,8 +242,8 @@
       'Fabrice et Marguerite dans un cœur de ballons rouges': 'சிவப்பு பலூன் இதயத்தில் Fabrice, Marguerite',
       'Tirage noir et blanc du couple, posé parmi des fleurs blanches': 'வெள்ளை மலர்களுக்கு நடுவே மணமக்களின் கருப்பு வெள்ளைப் படம்',
       'Fabrice et Marguerite devant la ville au coucher du soleil': 'சூரிய மறைவில் நகரின் முன் Fabrice, Marguerite',
-      'Fabrice et Marguerite assis devant des drapés roses et bleus, des guirlandes de jasmin et leur monogramme F et M':
-        'இளஞ்சிவப்பு, நீலத் திரைகள், மல்லிகை மாலைகள், F – M முத்திரை முன் அமர்ந்திருக்கும் Fabrice, Marguerite',
+      'Fabrice et Marguerite debout devant des drapés roses et bleus, des guirlandes de jasmin et leur monogramme F et M':
+        'இளஞ்சிவப்பு, நீலத் திரைகள், மல்லிகை மாலைகள், F – M முத்திரை முன் நிற்கும் Fabrice, Marguerite',
       'Fabrice, sourire tourné vers Marguerite': 'Marguerite-ஐப் பார்த்துப் புன்னகைக்கும் Fabrice',
       'Marguerite, jasmin dans les cheveux, sourire tourné vers Fabrice': 'கூந்தலில் மல்லிகையுடன் Fabrice-ஐப் பார்த்துப் புன்னகைக்கும் Marguerite',
       'Bougies et roses sur la table': 'மேசையில் மெழுகுவர்த்திகளும் ரோஜாக்களும்',
