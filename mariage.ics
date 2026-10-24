@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Fabrice et Marguerite//Mariage 2026//FR
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:mariage-fabrice-marguerite-20261106@darkorchid-swan-138363.hostingersit
+ e.com
+DTSTAMP:20261020T000000Z
+DTSTART:20261106T130000Z
+DTEND:20261106T225900Z
+SUMMARY:Mariage de Fabrice & Marguerite
+LOCATION:Mairie de Pantin\, 45 avenue du Général-Leclerc\, 93500 Pantin
+DESCRIPTION:14h Cérémonie civile – Mairie de Pantin\n16h30 Cérémonie 
+ religieuse – Église Notre-Dame-de-Pontmain\, 60 avenue de la Républiqu
+ e\, Bagnolet\n19h Réception – Espace Noisy-le-Sec\, 14 rue de la Pointe
+ \, Noisy-le-Sec
+URL:https://neuvaine-esperance.github.io/
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:Demain : mariage de Fabrice & Marguerite
+END:VALARM
+END:VEVENT
+END:VCALENDAR
