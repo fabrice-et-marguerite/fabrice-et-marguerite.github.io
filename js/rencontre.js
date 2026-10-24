@@ -16,9 +16,10 @@
   var phrases = section.querySelectorAll('[data-phrase]');
   var invite = section.querySelector('[data-invite]');
   var coeurs = section.querySelectorAll('[data-petit-coeur]');
-  var jambeG = section.querySelector('[data-jambe-g]');
-  var jambeD = section.querySelector('[data-jambe-d]');
-  var sari = section.querySelector('[data-sari]');
+  var pasF = fabrice.querySelectorAll('[data-pas]');
+  var pasM = marguerite.querySelectorAll('[data-pas]');
+  var imageF = 0;
+  var imageM = 0;
   section.classList.add('rencontre--active');
 
   // Autour des mariés : halo, couronne de cœurs flottants et pétales de jasmin (positions dans style.css).
@@ -46,9 +47,12 @@
   // tête de Fabrice et de Marguerite dans la pose « ensemble », par rapport au centre de l'image.
   var TETE_F_ENSEMBLE = -0.117;
   var TETE_M_ENSEMBLE = 0.0825;
+  // En marche, Fabrice a une grande enjambée : on les arrête un peu écartés, le fondu fait le dernier rapprochement.
+  var ECART_F = -0.13;
+  var ECART_M = 0.05;
   var HAUTEUR_M = 0.927; // Marguerite mesure 92,7 % de la hauteur de Fabrice
-  var TETE_F_IMAGE = 0.688; // position de la tête dans l'image de Fabrice seul (fraction de sa largeur)
-  var TETE_M_IMAGE = 0.703;
+  var TETE_F_IMAGE = 0.475; // position de la tête dans les images de marche (fraction de leur largeur)
+  var TETE_M_IMAGE = 0.698;
 
   var borne = function (x) { return Math.max(0, Math.min(1, x)); };
   var lisse = function (a, b, t) { var v = borne((t - a) / (b - a)); return v * v * (3 - 2 * v); };
@@ -69,26 +73,29 @@
     //    approchant et finit à sa place dans la pose « ensemble ».
     var avance = borne((p - 0.02) / 0.53);
     var marche = 1 - (1 - avance) * (1 - avance);
+    // Pendant le fondu, ils glissent jusqu'à leur place exacte dans la pose « ensemble ».
+    var rapproche = 1 - lisse(0.52, 0.63, p);
     var lF = fabrice.offsetWidth;
     var lM = marguerite.offsetWidth;
-    var teteF = entre(-(1 - TETE_F_IMAGE) * lF - 4, cx + TETE_F_ENSEMBLE * H, marche);
-    var teteM = entre(largeur + TETE_M_IMAGE * lM + 4, cx + TETE_M_ENSEMBLE * H, marche);
+    var teteF = entre(-(1 - TETE_F_IMAGE) * lF - 4, cx + (TETE_F_ENSEMBLE + ECART_F * rapproche) * H, marche);
+    var teteM = entre(largeur + TETE_M_IMAGE * lM + 4, cx + (TETE_M_ENSEMBLE + ECART_M * rapproche) * H, marche);
     // Huit foulées sur tout le trajet : la phase suit la distance parcourue, donc les pas « collent » au sol.
-    var pas = Math.sin(marche * 16 * Math.PI);
+    var pas = Math.sin(marche * 12 * Math.PI);
     var force = Math.min(1, 4 * (1 - marche)) * Math.min(1, avance * 8);
-    var rebond = Math.abs(pas) * 0.01 * H * force;
-    var bascule = pas * 0.8 * force;
-    // Fabrice va vers la droite : la jambe avant pivote vers la droite (angle négatif), l'autre recule.
-    jambeG.style.transform = 'rotate(' + (-pas * 11 * force) + 'deg)';
-    jambeD.style.transform = 'rotate(' + (pas * 11 * force) + 'deg)';
-    // Marguerite va vers la gauche : le bas du sari se balance d'un côté à l'autre à chaque pas.
-    sari.style.transform = 'skewX(' + (pas * 4 * force) + 'deg)';
+    var rebond = Math.abs(pas) * 0.006 * H * force;
+    var bascule = pas * 0.35 * force;
+    // Images de marche : elles défilent avec la distance parcourue (une boucle complète tous les 1/6 du trajet),
+    // si bien que les pas restent « collés » au sol, à l'aller comme au retour.
+    var nF = Math.floor(marche * 6 * pasF.length) % pasF.length;
+    var nM = Math.floor(marche * 6 * pasM.length) % pasM.length;
+    if (nF !== imageF) { pasF[imageF].style.opacity = 0; pasF[nF].style.opacity = 1; imageF = nF; }
+    if (nM !== imageM) { pasM[imageM].style.opacity = 0; pasM[nM].style.opacity = 1; imageM = nM; }
     fabrice.style.transform = 'translate(' + (teteF - TETE_F_IMAGE * lF) + 'px,' + (-rebond) + 'px) rotate(' + bascule + 'deg)';
     marguerite.style.transform = 'translate(' + (teteM - TETE_M_IMAGE * lM) + 'px,' + (-rebond * 0.8) + 'px) rotate(' + (-bascule * 0.7) + 'deg)';
 
     // 2. Les deux silhouettes se fondent dans la pose « ensemble » (55 → 66 %), puis dans le cœur (78 → 90 %).
-    var seuls = 1 - lisse(0.55, 0.66, p);
-    var aDeux = lisse(0.55, 0.66, p) * (1 - lisse(0.78, 0.9, p));
+    var seuls = 1 - lisse(0.56, 0.64, p);
+    var aDeux = lisse(0.56, 0.64, p) * (1 - lisse(0.78, 0.9, p));
     var enCoeur = lisse(0.78, 0.9, p);
     fabrice.style.opacity = seuls;
     marguerite.style.opacity = seuls;
@@ -131,7 +138,7 @@
   function demander() { if (!image) image = requestAnimationFrame(dessiner); }
   window.addEventListener('scroll', demander, { passive: true });
   window.addEventListener('resize', demander, { passive: true });
-  [jambeG, sari, ensemble, coeur].forEach(function (im) {
+  [pasF[0], pasM[0], ensemble, coeur].forEach(function (im) {
     if (!im.complete) im.addEventListener('load', demander);
   });
   demander();
