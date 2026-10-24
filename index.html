@@ -30,14 +30,15 @@
   <link rel="preload" href="polices/bodoni-moda-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="polices/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="polices/great-vibes-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/polices.css?v=20261025g">
-  <link rel="stylesheet" href="css/style.css?v=20261025g">
-  <script src="js/tete.js?v=20261025g"></script>
+  <link rel="stylesheet" href="css/polices.css?v=20261025i">
+  <link rel="stylesheet" href="css/style.css?v=20261025i">
+  <script src="js/tete.js?v=20261025i"></script>
   <script src="vendor/gsap.min.js" defer></script>
   <script src="vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/config.js?v=20261025g" defer></script>
-  <script src="js/langues.js?v=20261025g" defer></script>
-  <script src="js/main.js?v=20261025g" defer></script>
+  <script src="js/config.js?v=20261025i" defer></script>
+  <script src="js/langues.js?v=20261025i" defer></script>
+  <script src="js/main.js?v=20261025i" defer></script>
+  <script src="js/rencontre.js?v=20261025i" defer></script>
 </head>
 <body>
 <a class="saut" href="#histoire">Aller au contenu</a>
@@ -99,10 +100,42 @@
       </h1>
       <span class="hero__trait" aria-hidden="true"></span>
       <p class="hero__date hero__anim">Vendredi 6 novembre 2026</p>
-      <a class="bouton bouton--clair hero__bouton hero__anim" href="#histoire">Découvrir notre invitation</a>
+      <a class="bouton bouton--clair hero__bouton hero__anim" href="#rencontre">Découvrir notre invitation</a>
     </div>
     <ul class="hero__mots" aria-hidden="true"><li>Foi</li><li>Famille</li><li>Amour</li><li>Toujours</li></ul>
-    <a class="hero__chevron" href="#histoire" aria-label="Faire défiler vers l'invitation"></a>
+    <a class="hero__chevron" href="#rencontre" aria-label="Faire défiler vers l'invitation"></a>
+  </section>
+
+  <!-- 1 bis. Notre rencontre : animation au défilement (js/rencontre.js) -->
+  <section class="rencontre" id="rencontre" data-rencontre aria-label="Notre rencontre, en images animées">
+    <div class="rencontre__scene">
+      <p class="rencontre__sur">Notre rencontre</p>
+      <div class="rencontre__phrases">
+        <p class="rencontre__phrase" data-phrase>Deux chemins…</p>
+        <p class="rencontre__phrase" data-phrase>…une belle rencontre</p>
+        <p class="rencontre__phrase rencontre__phrase--fin" data-phrase>…et une aventure qui continue.</p>
+      </div>
+      <div class="rencontre__sol" aria-hidden="true"></div>
+      <div class="rencontre__fig rencontre__fig--fabrice" data-fabrice aria-hidden="true">
+        <img class="rencontre__piece rencontre__piece--jambe-g" data-jambe-g src="images/rencontre/fabrice-marche.webp" width="352" height="1295" alt="" decoding="async">
+        <img class="rencontre__piece rencontre__piece--jambe-d" data-jambe-d src="images/rencontre/fabrice-marche.webp" width="352" height="1295" alt="" decoding="async">
+        <img class="rencontre__piece rencontre__piece--corps" src="images/rencontre/fabrice-marche.webp" width="352" height="1295" alt="" decoding="async">
+      </div>
+      <div class="rencontre__fig rencontre__fig--marguerite" data-marguerite aria-hidden="true">
+        <img class="rencontre__piece rencontre__piece--sari" data-sari src="images/rencontre/marguerite-marche.webp" width="411" height="1173" alt="" decoding="async">
+        <img class="rencontre__piece rencontre__piece--buste" src="images/rencontre/marguerite-marche.webp" width="411" height="1173" alt="" decoding="async">
+      </div>
+      <img class="rencontre__duo rencontre__duo--ensemble" data-ensemble src="images/rencontre/ensemble.webp" width="743" height="1200" alt="" aria-hidden="true" decoding="async">
+      <img class="rencontre__duo rencontre__duo--coeur" data-coeur src="images/rencontre/coeur.webp" width="724" height="1200" alt="Fabrice et Marguerite forment un cœur avec leurs mains" decoding="async">
+      <div class="rencontre__coeurs" aria-hidden="true">
+        <span class="rencontre__petit-coeur" data-petit-coeur><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.6.7-1.4 2.2-2.6 4.3-2.6 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></span>
+        <span class="rencontre__petit-coeur" data-petit-coeur><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.6.7-1.4 2.2-2.6 4.3-2.6 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></span>
+        <span class="rencontre__petit-coeur" data-petit-coeur><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.6.7-1.4 2.2-2.6 4.3-2.6 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></span>
+        <span class="rencontre__petit-coeur" data-petit-coeur><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.6.7-1.4 2.2-2.6 4.3-2.6 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></span>
+        <span class="rencontre__petit-coeur" data-petit-coeur><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.6.7-1.4 2.2-2.6 4.3-2.6 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></span>
+      </div>
+      <p class="rencontre__invite" data-invite aria-hidden="true"><span>Faites défiler la page</span> <span class="rencontre__fleche">↓</span></p>
+    </div>
   </section>
 
   <div class="editorial">

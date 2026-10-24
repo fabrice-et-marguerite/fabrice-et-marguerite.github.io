@@ -351,6 +351,85 @@ body.menu-ouvert { overflow: hidden; }
   .langues { margin-left: 14px; margin-right: -6px; }
 }
 
+/* Notre rencontre : animation au défilement (js/rencontre.js). Sans script ou avec « réduire les animations »,
+   la section tient en un écran et montre la pose du cœur ; avec le script (.rencontre--active), elle s'allonge
+   et la scène reste collée en haut pendant que les mariés avancent l'un vers l'autre. */
+.rencontre {
+  --h: min(58svh, 520px);
+  --sol: 11svh;
+  position: relative; background: var(--ivoire);
+}
+.rencontre--active { height: 330svh; }
+.rencontre__scene {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  background:
+    radial-gradient(ellipse 46% 34% at 50% 78%, rgba(213, 181, 138, .28), transparent 75%),
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(101, 24, 38, .07), transparent 80%),
+    var(--ivoire);
+}
+.rencontre__sur {
+  position: absolute; top: max(78px, 10svh); left: 0; right: 0; margin: 0; text-align: center;
+  font-family: var(--f-ui); font-size: 14px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--vin);
+}
+.rencontre__phrases { position: absolute; top: calc(max(78px, 10svh) + 30px); left: 6%; right: 6%; }
+.rencontre__phrase {
+  position: absolute; left: 0; right: 0; margin: 0; text-align: center;
+  font-family: var(--f-texte); font-style: italic; font-weight: 500; font-size: clamp(30px, 7.4vw, 58px); line-height: 1.15;
+  color: var(--bordeaux); opacity: 0;
+}
+.rencontre__phrase--fin { opacity: 1; }
+.rencontre__sol {
+  position: absolute; left: 50%; bottom: calc(var(--sol) - 10px); width: min(80vw, 640px); height: 22px; transform: translateX(-50%);
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(66, 10, 22, .16), transparent 70%);
+}
+.rencontre__sol::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 10px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--or) 25%, var(--or) 75%, transparent); opacity: .7;
+}
+.rencontre__fig, .rencontre__duo {
+  position: absolute; bottom: var(--sol); width: auto; max-width: none; height: var(--h);
+  pointer-events: none; user-select: none; -webkit-user-drag: none;
+}
+.rencontre__fig { left: 0; opacity: 0; transform-origin: 50% 100%; will-change: transform, opacity; }
+/* Marionnettes : le même fichier en calques découpés (mesures : jambes séparées sous 63 % de la hauteur, espace
+   entre elles en biais de x 56 % à x 49 % ; bas du sari sous 62 %). Les jambes pivotent à la hanche. */
+.rencontre__fig--fabrice { aspect-ratio: 352 / 1295; }
+.rencontre__fig--marguerite { aspect-ratio: 411 / 1173; }
+.rencontre__piece { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; will-change: transform; }
+.rencontre__piece--corps { z-index: 2; clip-path: polygon(0 0, 100% 0, 100% 64%, 0 64%); }
+.rencontre__piece--jambe-g { clip-path: polygon(0 58%, 56% 58%, 56% 66%, 49% 100%, 0 100%); transform-origin: 40% 61%; }
+.rencontre__piece--jambe-d { clip-path: polygon(56% 58%, 100% 58%, 100% 100%, 49% 100%, 56% 66%); transform-origin: 69% 61%; }
+.rencontre__piece--buste { z-index: 2; clip-path: polygon(0 0, 100% 0, 100% 64%, 0 64%); }
+.rencontre__piece--sari { clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); transform-origin: 50% 60%; }
+.rencontre__fig--fabrice { z-index: 2; }
+.rencontre__fig--marguerite { z-index: 3; height: calc(var(--h) * .927); }
+.rencontre__duo { left: 50%; transform: translateX(-50%); transform-origin: 50% 100%; will-change: opacity, transform; }
+.rencontre__duo--ensemble { z-index: 4; opacity: 0; }
+.rencontre__duo--coeur { z-index: 5; }
+.rencontre__coeurs { position: absolute; left: 50%; bottom: calc(var(--sol) + var(--h) * .62); width: calc(var(--h) * .6); z-index: 6; }
+.rencontre__petit-coeur { position: absolute; left: calc(50% + var(--x)); top: 0; width: 18px; height: 18px; opacity: 0; }
+.rencontre__petit-coeur:nth-child(2n) { width: 13px; height: 13px; }
+.rencontre__petit-coeur:nth-child(1) { --x: -38%; }
+.rencontre__petit-coeur:nth-child(2) { --x: -12%; }
+.rencontre__petit-coeur:nth-child(3) { --x: 14%; }
+.rencontre__petit-coeur:nth-child(4) { --x: 34%; }
+.rencontre__petit-coeur:nth-child(5) { --x: -26%; }
+.rencontre__petit-coeur svg { display: block; width: 100%; height: 100%; fill: var(--or); }
+.rencontre__invite {
+  position: absolute; left: 0; right: 0; bottom: 3.5svh; margin: 0; text-align: center; opacity: 0;
+  font-family: var(--f-ui); font-size: 14px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--vin);
+}
+.rencontre--active .rencontre__invite { opacity: 1; }
+.rencontre__fleche { display: inline-block; animation: rencontre-fleche 1.6s ease-in-out infinite; }
+@keyframes rencontre-fleche { 50% { transform: translateY(5px); } }
+@media (min-width: 900px) {
+  .rencontre { --h: min(60svh, 620px); --sol: 11svh; }
+  .rencontre__phrase { font-size: clamp(36px, 4vw, 60px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rencontre__fleche { animation: none; }
+}
+
 /* Lisibilité (personnes âgées) : audit du 25 oct. 2026. Petites majuscules à 14-16 px au lieu de 9,5-11 px, moins
    espacées et un peu plus grasses ; textes en Cormorant à 18-21 px et en graisse 500 (le 400 est très fin) ;
    mentions « (facultatif) » plus foncées. Ce bloc ne fait que surcharger : le supprimer rend le design d'origine. */

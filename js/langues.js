@@ -29,6 +29,14 @@
       'Découvrir notre invitation': 'Discover our invitation',
       'Foi': 'Faith', 'Famille': 'Family', 'Amour': 'Love', 'Toujours': 'Forever',
       "Faire défiler vers l'invitation": 'Scroll to the invitation',
+      // Notre rencontre
+      'Notre rencontre': 'How we met',
+      'Notre rencontre, en images animées': 'How we met, in animated pictures',
+      'Deux chemins…': 'Two paths…',
+      '…une belle rencontre': '…one beautiful encounter',
+      '…et une aventure qui continue.': '…and an adventure that goes on.',
+      'Faites défiler la page': 'Keep scrolling',
+      'Fabrice et Marguerite forment un cœur avec leurs mains': 'Fabrice and Marguerite making a heart with their hands',
       // Histoire et compte à rebours
       'Les familles Boliva, Raymond et Rouvier sont heureuses de vous faire part du mariage de leurs enfants.':
         'The Boliva, Raymond and Rouvier families are delighted to announce the marriage of their children.',
@@ -154,6 +162,13 @@
       'Découvrir notre invitation': 'எங்கள் அழைப்பிதழைக் காண்க',
       'Foi': 'நம்பிக்கை', 'Famille': 'குடும்பம்', 'Amour': 'அன்பு', 'Toujours': 'என்றென்றும்',
       "Faire défiler vers l'invitation": 'அழைப்பிதழுக்குச் செல்லவும்',
+      'Notre rencontre': 'எங்கள் சந்திப்பு',
+      'Notre rencontre, en images animées': 'எங்கள் சந்திப்பு – அசைவூட்டப் படங்களில்',
+      'Deux chemins…': 'இரண்டு பாதைகள்…',
+      '…une belle rencontre': '…ஓர் அழகான சந்திப்பு',
+      '…et une aventure qui continue.': '…தொடரும் ஒரு பயணம்.',
+      'Faites défiler la page': 'பக்கத்தைக் கீழே நகர்த்தவும்',
+      'Fabrice et Marguerite forment un cœur avec leurs mains': 'கைகளால் இதய வடிவம் காட்டும் Fabrice, Marguerite',
       'Les familles Boliva, Raymond et Rouvier sont heureuses de vous faire part du mariage de leurs enfants.':
         'Boliva, Raymond, Rouvier குடும்பத்தினர் தங்கள் பிள்ளைகளின் திருமணத்தை மகிழ்ச்சியுடன் அறிவிக்கின்றனர்.',
       '« Deux chemins, une belle rencontre, et une aventure qui continue... Nous sommes heureux de vous inviter à célébrer notre mariage. »':
