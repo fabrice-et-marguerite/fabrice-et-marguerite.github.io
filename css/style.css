@@ -347,19 +347,10 @@ body.menu-ouvert { overflow: hidden; }
   display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0;
   border: 0; background: transparent; cursor: pointer; opacity: .55; transition: opacity .25s, transform .25s;
 }
-.langues__choix svg, .langues__choix--ta { width: 24px; height: 16px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(245, 239, 230, .55); }
-.langues__choix--ta {
-  width: 40px; height: 40px; box-shadow: none; position: relative; color: var(--ivoire);
-  font-family: 'Noto Sans Tamil', 'Tamil Sangam MN', 'Nirmala UI', 'Latha', sans-serif; font-size: 15px; line-height: 1;
-}
-.langues__choix--ta::before {
-  content: ''; position: absolute; left: 8px; top: 12px; width: 24px; height: 16px; border-radius: 2px;
-  background: var(--vin); box-shadow: 0 0 0 1px rgba(245, 239, 230, .55); z-index: -1;
-}
-.langues__choix--ta { isolation: isolate; }
+.langues__choix svg { width: 24px; height: 16px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(245, 239, 230, .55); }
 .langues__choix:hover, .langues__choix:focus-visible { opacity: .9; }
 .langues__choix[aria-pressed="true"] { opacity: 1; transform: translateY(-1px); }
-.langues__choix[aria-pressed="true"] svg, .langues__choix--ta[aria-pressed="true"]::before { box-shadow: 0 0 0 1.5px var(--champagne); }
+.langues__choix[aria-pressed="true"] svg { box-shadow: 0 0 0 1.5px var(--champagne); }
 .langues__choix:focus-visible { outline: 1px solid var(--champagne); outline-offset: -4px; }
 @media (min-width: 900px) {
   .langues { margin-left: 14px; margin-right: -6px; }
