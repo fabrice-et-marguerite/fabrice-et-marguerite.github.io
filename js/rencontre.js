@@ -51,7 +51,8 @@
   var ECART_F = -0.13;
   var ECART_M = 0.05;
   var HAUTEUR_M = 0.927; // Marguerite mesure 92,7 % de la hauteur de Fabrice
-  var TETE_F_IMAGE = 0.475; // position de la tête dans les images de marche (fraction de leur largeur)
+  var TETE_F_IMAGE = 0.531; // position de la tête dans les images de marche (fraction de leur largeur)
+  var FOULEE = 0.9; // longueur d'une foulée complète (un cycle d'images), en hauteurs de personnage
   var TETE_M_IMAGE = 0.698;
 
   var borne = function (x) { return Math.max(0, Math.min(1, x)); };
@@ -77,17 +78,19 @@
     var rapproche = 1 - lisse(0.52, 0.63, p);
     var lF = fabrice.offsetWidth;
     var lM = marguerite.offsetWidth;
-    var teteF = entre(-(1 - TETE_F_IMAGE) * lF - 4, cx + (TETE_F_ENSEMBLE + ECART_F * rapproche) * H, marche);
-    var teteM = entre(largeur + TETE_M_IMAGE * lM + 4, cx + (TETE_M_ENSEMBLE + ECART_M * rapproche) * H, marche);
+    var departF = -(1 - TETE_F_IMAGE) * lF - 4;
+    var departM = largeur + TETE_M_IMAGE * lM + 4;
+    var teteF = entre(departF, cx + (TETE_F_ENSEMBLE + ECART_F * rapproche) * H, marche);
+    var teteM = entre(departM, cx + (TETE_M_ENSEMBLE + ECART_M * rapproche) * H, marche);
     // Huit foulées sur tout le trajet : la phase suit la distance parcourue, donc les pas « collent » au sol.
     var pas = Math.sin(marche * 12 * Math.PI);
     var force = Math.min(1, 4 * (1 - marche)) * Math.min(1, avance * 8);
     var rebond = Math.abs(pas) * 0.006 * H * force;
     var bascule = pas * 0.35 * force;
-    // Images de marche : elles défilent avec la distance parcourue (une boucle complète tous les 1/6 du trajet),
-    // si bien que les pas restent « collés » au sol, à l'aller comme au retour.
-    var nF = Math.floor(marche * 6 * pasF.length) % pasF.length;
-    var nM = Math.floor(marche * 6 * pasM.length) % pasM.length;
+    // Images de marche : un cycle complet par foulée parcourue à l'écran, si bien que les pieds ne glissent pas,
+    // sur téléphone comme sur grand écran, à l'aller comme au retour.
+    var nF = Math.floor(Math.abs(teteF - departF) / (FOULEE * H) * pasF.length) % pasF.length;
+    var nM = Math.floor(Math.abs(teteM - departM) / (FOULEE * 0.927 * H) * pasM.length) % pasM.length;
     if (nF !== imageF) { pasF[imageF].style.opacity = 0; pasF[nF].style.opacity = 1; imageF = nF; }
     if (nM !== imageM) { pasM[imageM].style.opacity = 0; pasM[nM].style.opacity = 1; imageM = nM; }
     fabrice.style.transform = 'translate(' + (teteF - TETE_F_IMAGE * lF) + 'px,' + (-rebond) + 'px) rotate(' + bascule + 'deg)';
