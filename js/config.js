@@ -14,7 +14,7 @@ window.MARIAGE = {
     court: '6 novembre 2026'
   },
   site: {
-    url: 'https://neuvaine-esperance.github.io/',
+    url: 'https://fabrice-et-marguerite.github.io/',
     titre: 'Fabrice & Marguerite — 6 novembre 2026'
   },
   histoire: 'Deux chemins, une belle rencontre, et une aventure qui continue... Nous sommes heureux de vous inviter à célébrer notre mariage.',

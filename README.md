@@ -1,6 +1,6 @@
 # Fabrice & Marguerite — invitation de mariage
 
-Invitation au mariage du vendredi 6 novembre 2026, publiée sur https://neuvaine-esperance.github.io/.
+Invitation au mariage du vendredi 6 novembre 2026, publiée sur https://fabrice-et-marguerite.github.io/.
 
 - Pages statiques (HTML, CSS, JS) servies par GitHub Pages.
 - Le formulaire de réponse envoie au script `rsvp.php` hébergé chez Hostinger
