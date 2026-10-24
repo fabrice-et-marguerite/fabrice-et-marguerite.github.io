@@ -116,7 +116,8 @@
 
     // 4. Petits cœurs dorés qui s'envolent pendant la pose du cœur.
     // 5. Autour des mariés : le halo et les cœurs flottants arrivent un à un quand ils se rejoignent ;
-    //    les pétales tombent pendant le cœur final. Les balancements ne tournent que lorsqu'ils sont visibles.
+    //    les pétales tombent pendant toute la scène, plus denses au cœur final. Tout continue de bouger tout
+    //    seul (animations CSS) tant que la section est à l'écran, même si l'on arrête de défiler.
     var reunis = lisse(0.55, 0.7, p);
     halo.style.opacity = reunis * (0.75 + 0.25 * enCoeur);
     halo.style.transform = 'translateX(-50%) scale(' + entre(0.7, 1.08, reunis) + ')';
@@ -125,10 +126,10 @@
       flottants[f].style.opacity = arrivee;
       flottants[f].style.transform = 'scale(' + entre(0.3, 1, arrivee) + ')';
     }
-    pluie.style.opacity = lisse(0.8, 0.9, p);
+    pluie.style.opacity = entre(0.55, 1, lisse(0.78, 0.9, p));
     var visible = r.bottom > 0 && r.top < window.innerHeight;
     section.classList.toggle('rencontre--reunis', visible && reunis > 0);
-    section.classList.toggle('rencontre--pluie', visible && p > 0.8);
+    section.classList.toggle('rencontre--pluie', visible);
 
     for (var k = 0; k < coeurs.length; k++) {
       var depart = 0.84 + k * 0.025;
