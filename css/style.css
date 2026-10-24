@@ -356,6 +356,54 @@ body.menu-ouvert { overflow: hidden; }
   .langues { margin-left: 14px; margin-right: -6px; }
 }
 
+/* Lisibilité (personnes âgées) : audit du 25 oct. 2026. Petites majuscules à 14-16 px au lieu de 9,5-11 px, moins
+   espacées et un peu plus grasses ; textes en Cormorant à 18-21 px et en graisse 500 (le 400 est très fin) ;
+   mentions « (facultatif) » plus foncées. Ce bloc ne fait que surcharger : le supprimer rend le design d'origine. */
+body { font-weight: 500; }
+.saut { font-size: 16px; }
+
+.bouton { font-size: 15px; letter-spacing: .1em; font-weight: 500; padding: 16px 28px; }
+.bouton--pilule { font-size: 14px; padding: 12px 22px; }
+.infos__actions .bouton { font-size: 14px; }
+.formulaire .bouton { font-size: 16px; padding: 18px 28px; letter-spacing: .1em; }
+.lien-souligne, .infos__carte .lien-souligne, .histoire .lien-souligne { font-size: 14px; letter-spacing: .1em; font-weight: 500; }
+
+.hero__sur { font-size: 14px; letter-spacing: .22em; font-weight: 500; }
+.hero__date { font-size: clamp(15px, 4vw, 20px); letter-spacing: .14em; font-weight: 500; }
+.menu__date { font-size: 14px; letter-spacing: .14em; }
+
+.histoire__familles { font-size: 19px; }
+.histoire__p { font-size: 21px; }
+.compte__etiquette { font-size: 13px; letter-spacing: .1em; font-weight: 500; }
+.compte__sous, .compte__fete-sous { font-size: 14px; letter-spacing: .14em; font-weight: 500; }
+
+.evenement__titre { font-size: 14px; letter-spacing: .08em; font-weight: 600; }
+.evenement__adresse { font-size: 18px; }
+.evenement__note { font-size: 18px; }
+.galerie__intro { font-size: 20px; }
+
+.infos__etiquette { font-size: 14px; letter-spacing: .08em; font-weight: 600; }
+.infos__adresse { font-size: 18px; }
+
+.rsvp__intro { font-size: 21px; }
+.rsvp__demo { font-size: 15px; }
+.champ__etiquette { font-size: 15px; letter-spacing: .06em; font-weight: 600; }
+.champ__etiquette small { font-size: 15px; color: #5f4f4a; font-weight: 400; }
+.presence__choix span { font-size: 15px; letter-spacing: .06em; font-weight: 500; padding: 16px 8px; }
+.formulaire__note { font-size: 17px; }
+.rsvp__merci-texte { font-size: 19px; }
+
+.fin__date { font-size: 14px; letter-spacing: .16em; font-weight: 500; }
+.fin__citation { font-size: 20px; }
+.fin__familles { font-size: 18px; }
+.pied { font-size: 13px; letter-spacing: .12em; }
+
+@media (min-width: 900px) {
+  .nav__liens { font-size: 13px; letter-spacing: .1em; }
+  .histoire__familles { font-size: clamp(16px, 1.35vw, 19px); }
+  .histoire__p { font-size: clamp(18px, 1.75vw, 21px); }
+}
+
 /* Écriture tamoule : les polices du site n'ont pas de glyphes tamouls, le navigateur prend celle du système
    (Noto Sans Tamil, Tamil Sangam MN, Nirmala UI). Pas d'espacement entre les lettres (il casse les ligatures), et des
    petites étiquettes un peu plus grandes, car le tamoul devient illisible sous 13 px. */
@@ -365,6 +413,6 @@ html[lang="ta"] .titre { line-height: 1.5; }
 html[lang="ta"] .hero__sur, html[lang="ta"] .bouton, html[lang="ta"] .lien-souligne, html[lang="ta"] .compte__etiquette,
 html[lang="ta"] .compte__sous, html[lang="ta"] .evenement__titre, html[lang="ta"] .infos__etiquette,
 html[lang="ta"] .champ__etiquette, html[lang="ta"] .presence__choix span, html[lang="ta"] .fin__date,
-html[lang="ta"] .pied, html[lang="ta"] .nav__liens, html[lang="ta"] .menu__date { font-size: 14px; }
+html[lang="ta"] .pied, html[lang="ta"] .nav__liens, html[lang="ta"] .menu__date { font-size: 15px; }
 html[lang="ta"] .hero__date { font-size: clamp(14px, 3.6vw, 18px); }
 html[lang="ta"] .rsvp__merci-calli { font-size: .55em; }
