@@ -158,7 +158,7 @@ body.menu-ouvert { overflow: hidden; }
 
 /* Photo des mains */
 .mains { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--bordeaux); }
-.mains img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 50%; transform: scale(1.12); }
+.mains img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 32% 50%; transform: scale(1.06); }
 .mains__voile { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(66, 10, 22, 0) 40%, rgba(66, 10, 22, .45)); }
 .mains__monogramme { position: absolute; left: 28px; bottom: 30px; font-size: clamp(64px, 13vw, 104px); line-height: 1; color: var(--ivoire); text-shadow: 0 2px 24px rgba(33, 23, 25, .45); }
 
