@@ -122,7 +122,6 @@
       'Fabrice et Marguerite, regards échangés au milieu des fleurs': 'Fabrice and Marguerite looking at each other among the flowers',
       'Fabrice et Marguerite dans un cœur de ballons rouges': 'Fabrice and Marguerite in a heart of red balloons',
       'Tirage noir et blanc du couple, posé parmi des fleurs blanches': 'Black and white print of the couple among white flowers',
-      'Fabrice et Marguerite devant la ville au coucher du soleil': 'Fabrice and Marguerite in front of the city at sunset',
       'Fabrice et Marguerite debout devant des drapés roses et bleus, des guirlandes de jasmin et leur monogramme F et M':
         'Fabrice and Marguerite standing before pink and blue drapes, jasmine garlands and their F and M monogram',
       'Fabrice, sourire tourné vers Marguerite': 'Fabrice, smiling at Marguerite',
@@ -132,8 +131,7 @@
       "Enveloppe ivoire fermée d'un sceau de cire": 'Ivory envelope closed with a wax seal',
       'Arche fleurie et drapés rouges': 'Flowered arch and red drapes',
       'Le faire-part officiel : les familles Boliva, Raymond et Rouvier sont heureuses de vous faire part du mariage de Fabrice et Marguerite, vendredi 6 novembre 2026':
-        'The official invitation card: the Boliva, Raymond and Rouvier families are delighted to announce the marriage of Fabrice and Marguerite, Friday 6 November 2026',
-      'Fabrice et Marguerite, main dans la main devant la ville au crépuscule': 'Fabrice and Marguerite hand in hand in front of the city at dusk'
+        'The official invitation card: the Boliva, Raymond and Rouvier families are delighted to announce the marriage of Fabrice and Marguerite, Friday 6 November 2026'
     },
 
     ta: {
@@ -241,7 +239,6 @@
       'Fabrice et Marguerite, regards échangés au milieu des fleurs': 'மலர்களுக்கு நடுவே ஒருவரையொருவர் பார்க்கும் Fabrice, Marguerite',
       'Fabrice et Marguerite dans un cœur de ballons rouges': 'சிவப்பு பலூன் இதயத்தில் Fabrice, Marguerite',
       'Tirage noir et blanc du couple, posé parmi des fleurs blanches': 'வெள்ளை மலர்களுக்கு நடுவே மணமக்களின் கருப்பு வெள்ளைப் படம்',
-      'Fabrice et Marguerite devant la ville au coucher du soleil': 'சூரிய மறைவில் நகரின் முன் Fabrice, Marguerite',
       'Fabrice et Marguerite debout devant des drapés roses et bleus, des guirlandes de jasmin et leur monogramme F et M':
         'இளஞ்சிவப்பு, நீலத் திரைகள், மல்லிகை மாலைகள், F – M முத்திரை முன் நிற்கும் Fabrice, Marguerite',
       'Fabrice, sourire tourné vers Marguerite': 'Marguerite-ஐப் பார்த்துப் புன்னகைக்கும் Fabrice',
@@ -251,8 +248,7 @@
       "Enveloppe ivoire fermée d'un sceau de cire": 'மெழுகு முத்திரையிட்ட தந்த நிற உறை',
       'Arche fleurie et drapés rouges': 'மலர் வளைவும் சிவப்புத் திரைகளும்',
       'Le faire-part officiel : les familles Boliva, Raymond et Rouvier sont heureuses de vous faire part du mariage de Fabrice et Marguerite, vendredi 6 novembre 2026':
-        'அதிகாரப்பூர்வ அழைப்பிதழ்: Boliva, Raymond, Rouvier குடும்பத்தினர் Fabrice – Marguerite திருமணத்தை மகிழ்ச்சியுடன் அறிவிக்கின்றனர், வெள்ளிக்கிழமை 6 நவம்பர் 2026',
-      'Fabrice et Marguerite, main dans la main devant la ville au crépuscule': 'அந்தி வேளையில் நகரின் முன் கைகோர்த்து நிற்கும் Fabrice, Marguerite'
+        'அதிகாரப்பூர்வ அழைப்பிதழ்: Boliva, Raymond, Rouvier குடும்பத்தினர் Fabrice – Marguerite திருமணத்தை மகிழ்ச்சியுடன் அறிவிக்கின்றனர், வெள்ளிக்கிழமை 6 நவம்பர் 2026'
     }
   };
 
@@ -264,6 +260,8 @@
 
   var norme = function (s) { return s.replace(/\s+/g, ' ').trim(); };
   var traduire = function (fr) { var d = DICO[langue]; return (d && d[fr]) || fr; };
+  // Les guillemets français restent collés à leur texte (espace insécable) : jamais un « » » seul en bout de ligne.
+  var typo = function (s) { return s.replace(/« /g, '« ').replace(/ »/g, ' »'); };
 
   window.T = function (fr, vars) {
     var s = traduire(fr);
@@ -293,8 +291,10 @@
       var bords = n.__fr.match(/^(\s*)[\s\S]*?(\s*)$/);
       var cle = norme(n.__fr);
       var d = DICO[langue];
-      var t = langue === 'fr' ? cle : (d && d[cle]);
-      if (t !== undefined && t !== null) n.nodeValue = bords[1] + t + bords[2];
+      // En français, on remet le texte d'origine tel quel (avec ses espaces insécables).
+      if (langue === 'fr') { n.nodeValue = n.__fr; return; }
+      var t = d && d[cle];
+      if (t !== undefined && t !== null) n.nodeValue = bords[1] + typo(t) + bords[2];
     });
     ATTRIBUTS.forEach(function (a) {
       Array.prototype.forEach.call(document.querySelectorAll('[' + a + ']'), function (el) {
