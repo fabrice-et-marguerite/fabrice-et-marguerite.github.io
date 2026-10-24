@@ -30,13 +30,14 @@
   <link rel="preload" href="polices/bodoni-moda-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="polices/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="polices/great-vibes-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/polices.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/tete.js"></script>
+  <link rel="stylesheet" href="css/polices.css?v=20261025">
+  <link rel="stylesheet" href="css/style.css?v=20261025">
+  <script src="js/tete.js?v=20261025"></script>
   <script src="vendor/gsap.min.js" defer></script>
   <script src="vendor/ScrollTrigger.min.js" defer></script>
-  <script src="js/config.js" defer></script>
-  <script src="js/main.js" defer></script>
+  <script src="js/config.js?v=20261025" defer></script>
+  <script src="js/langues.js?v=20261025" defer></script>
+  <script src="js/main.js?v=20261025" defer></script>
 </head>
 <body>
 <a class="saut" href="#histoire">Aller au contenu</a>
@@ -50,6 +51,15 @@
     <a href="#infos">Infos pratiques</a>
     <a href="#rsvp">RSVP</a>
   </nav>
+  <div class="langues" role="group" aria-label="Langue / Language / மொழி">
+    <button type="button" class="langues__choix" data-langue="fr" lang="fr" aria-label="Français" title="Français" aria-pressed="true">
+      <svg viewBox="0 0 3 2" aria-hidden="true" focusable="false"><path fill="#002654" d="M0 0h1v2H0z"/><path fill="#fff" d="M1 0h1v2H1z"/><path fill="#CE1126" d="M2 0h1v2H2z"/></svg>
+    </button>
+    <button type="button" class="langues__choix" data-langue="en" lang="en" aria-label="English" title="English" aria-pressed="false">
+      <svg viewBox="0 0 60 30" aria-hidden="true" focusable="false"><clipPath id="drapeau-uk"><path d="M30 15h30v15zv15H0zH0V0zV0h30z"/></clipPath><path fill="#012169" d="M0 0h60v30H0z"/><path stroke="#fff" stroke-width="6" d="M0 0l60 30m0-30L0 30"/><path stroke="#C8102E" stroke-width="4" d="M0 0l60 30m0-30L0 30" clip-path="url(#drapeau-uk)"/><path stroke="#fff" stroke-width="10" d="M30 0v30M0 15h60"/><path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"/></svg>
+    </button>
+    <button type="button" class="langues__choix langues__choix--ta" data-langue="ta" lang="ta" aria-label="தமிழ்" title="தமிழ்" aria-pressed="false">த</button>
+  </div>
   <button class="nav__burger" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="Ouvrir le menu"><span></span><span></span></button>
 </header>
 

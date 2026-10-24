@@ -340,3 +340,40 @@ body.menu-ouvert { overflow: hidden; }
   .hero__chevron, .menu, .menu nav a { animation: none; }
   * { transition-duration: .01ms !important; }
 }
+
+/* Sélecteur de langue (barre de navigation, en haut à droite) */
+.langues { display: flex; align-items: center; gap: 4px; margin-left: auto; margin-right: 4px; }
+.langues__choix {
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0;
+  border: 0; background: transparent; cursor: pointer; opacity: .55; transition: opacity .25s, transform .25s;
+}
+.langues__choix svg, .langues__choix--ta { width: 24px; height: 16px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(245, 239, 230, .55); }
+.langues__choix--ta {
+  width: 40px; height: 40px; box-shadow: none; position: relative; color: var(--ivoire);
+  font-family: 'Noto Sans Tamil', 'Tamil Sangam MN', 'Nirmala UI', 'Latha', sans-serif; font-size: 15px; line-height: 1;
+}
+.langues__choix--ta::before {
+  content: ''; position: absolute; left: 8px; top: 12px; width: 24px; height: 16px; border-radius: 2px;
+  background: var(--vin); box-shadow: 0 0 0 1px rgba(245, 239, 230, .55); z-index: -1;
+}
+.langues__choix--ta { isolation: isolate; }
+.langues__choix:hover, .langues__choix:focus-visible { opacity: .9; }
+.langues__choix[aria-pressed="true"] { opacity: 1; transform: translateY(-1px); }
+.langues__choix[aria-pressed="true"] svg, .langues__choix--ta[aria-pressed="true"]::before { box-shadow: 0 0 0 1.5px var(--champagne); }
+.langues__choix:focus-visible { outline: 1px solid var(--champagne); outline-offset: -4px; }
+@media (min-width: 900px) {
+  .langues { margin-left: 14px; margin-right: -6px; }
+}
+
+/* Écriture tamoule : les polices du site n'ont pas de glyphes tamouls, le navigateur prend celle du système
+   (Noto Sans Tamil, Tamil Sangam MN, Nirmala UI). Pas d'espacement entre les lettres (il casse les ligatures), et des
+   petites étiquettes un peu plus grandes, car le tamoul devient illisible sous 13 px. */
+html[lang="ta"] * { letter-spacing: normal !important; }
+html[lang="ta"] .bouton { white-space: normal; line-height: 1.45; }
+html[lang="ta"] .titre { line-height: 1.5; }
+html[lang="ta"] .hero__sur, html[lang="ta"] .bouton, html[lang="ta"] .lien-souligne, html[lang="ta"] .compte__etiquette,
+html[lang="ta"] .compte__sous, html[lang="ta"] .evenement__titre, html[lang="ta"] .infos__etiquette,
+html[lang="ta"] .champ__etiquette, html[lang="ta"] .presence__choix span, html[lang="ta"] .fin__date,
+html[lang="ta"] .pied, html[lang="ta"] .nav__liens, html[lang="ta"] .menu__date { font-size: 14px; }
+html[lang="ta"] .hero__date { font-size: clamp(14px, 3.6vw, 18px); }
+html[lang="ta"] .rsvp__merci-calli { font-size: .55em; }

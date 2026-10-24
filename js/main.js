@@ -31,13 +31,14 @@
     sections.forEach(function (s) { obs.observe(s); });
   }
 
+  var T = window.T || function (t) { return t; };
   var burger = $('.nav__burger');
   var menu = $('#menu-mobile');
   var fermerMenu = $('.menu__fermer', menu);
   function menuOuvert(ouvert) {
     menu.hidden = !ouvert;
     burger.setAttribute('aria-expanded', String(ouvert));
-    burger.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+    burger.setAttribute('aria-label', ouvert ? T('Fermer le menu') : T('Ouvrir le menu'));
     document.body.classList.toggle('menu-ouvert', ouvert);
     (ouvert ? fermerMenu : burger).focus();
   }
@@ -132,7 +133,8 @@
   var merciTexte = $('[data-merci-texte]');
   var blocPresent = $('[data-si-present]');
   var modeServeur = false;
-  var libelleBouton = bouton.textContent;
+  // Libellé français d'origine (langues.js le garde sur le nœud texte) : T() le traduit dans la langue du moment.
+  var libelleBouton = ((bouton.firstChild && bouton.firstChild.__fr) || bouton.textContent).trim();
 
   form.elements.t.value = String(Date.now());
 
@@ -150,13 +152,13 @@
     .catch(function () { modeServeur = false; demo.hidden = false; });
 
   function montrerErreur(texte) {
-    erreur.textContent = texte;
+    erreur.textContent = T(texte);
     erreur.hidden = false;
     erreur.scrollIntoView({ block: 'nearest', behavior: reduit ? 'auto' : 'smooth' });
   }
   function chargement(actif) {
     bouton.disabled = actif;
-    bouton.textContent = actif ? 'Envoi en cours…' : libelleBouton;
+    bouton.textContent = actif ? T('Envoi en cours…') : T(libelleBouton);
   }
 
   form.addEventListener('submit', function (e) {
@@ -167,7 +169,7 @@
     var personnes = parseInt(form.elements.personnes.value, 10) || 1;
     if (nom.length < 2) { montrerErreur('Merci d’indiquer votre nom et prénom.'); form.elements.nom.focus(); return; }
     if (presence !== 'oui' && presence !== 'non') { montrerErreur('Merci d’indiquer si vous serez présent.'); return; }
-    if (presence === 'oui' && (personnes < 1 || personnes > maxPersonnes)) { montrerErreur('Le nombre de personnes doit être compris entre 1 et ' + maxPersonnes + '.'); return; }
+    if (presence === 'oui' && (personnes < 1 || personnes > maxPersonnes)) { montrerErreur(T('Le nombre de personnes doit être compris entre 1 et {max}.', { max: maxPersonnes })); return; }
     if (!modeServeur) {
       montrerErreur('Mode démonstration : votre réponse ne peut pas être enregistrée ici. Merci de répondre directement aux mariés.');
       return;
@@ -187,13 +189,15 @@
         var j = res.corps || {};
         if (res.statut === 429) { montrerErreur(j.erreur || 'Trop de réponses envoyées depuis cet appareil. Réessayez dans une heure.'); return; }
         if (!j.ok) { montrerErreur(j.erreur || 'Enregistrement impossible pour le moment. Réessayez dans quelques minutes.'); return; }
-        var court = (C.date && C.date.court) || '6 novembre 2026';
+        var court = T((C.date && C.date.court) || '6 novembre 2026');
         if (presence === 'oui') {
-          merciTitre.textContent = 'Nous avons hâte de vous retrouver';
-          merciTexte.textContent = nom + ', votre présence' + (personnes > 1 ? ' (' + personnes + ' personnes)' : '') + ' est bien notée pour le ' + court + '.';
+          merciTitre.textContent = T('Nous avons hâte de vous retrouver');
+          merciTexte.textContent = personnes > 1
+            ? T('{nom}, votre présence ({n} personnes) est bien notée pour le {date}.', { nom: nom, n: personnes, date: court })
+            : T('{nom}, votre présence est bien notée pour le {date}.', { nom: nom, date: court });
         } else {
-          merciTitre.textContent = 'Vous nous manquerez';
-          merciTexte.textContent = nom + ', merci de nous avoir prévenus. Nous penserons à vous ce jour-là.';
+          merciTitre.textContent = T('Vous nous manquerez');
+          merciTexte.textContent = T('{nom}, merci de nous avoir prévenus. Nous penserons à vous ce jour-là.', { nom: nom });
         }
         form.hidden = true;
         merci.hidden = false;
