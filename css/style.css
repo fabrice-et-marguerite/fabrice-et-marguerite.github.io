@@ -185,7 +185,7 @@ body.menu-ouvert { overflow: hidden; }
 .galerie__mosaique { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 18px; padding: 48px var(--gouttiere) 0; align-items: center; }
 .galerie__mosaique .tirage--gauche { transform: rotate(-3deg); }
 .galerie__mosaique .tirage--droite { transform: rotate(2.5deg); }
-.galerie__mosaique .tirage--gauche img { aspect-ratio: 433 / 284; object-fit: cover; }
+.galerie__mosaique .tirage--gauche img { aspect-ratio: 4 / 5; object-fit: cover; }
 .galerie__mosaique .tirage--droite img { aspect-ratio: 382 / 501; object-fit: cover; }
 .galerie__tirage-fleurs { grid-column: 1 / -1; width: min(72%, 320px); margin: 10px auto 0; }
 .galerie__tirage-fleurs img { aspect-ratio: 379 / 501; object-fit: cover; }
