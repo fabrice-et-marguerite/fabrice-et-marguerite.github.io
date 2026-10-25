@@ -53,7 +53,7 @@
   var HAUTEUR_M = 0.927; // Marguerite mesure 92,7 % de la hauteur de Fabrice
   var TETE_F_IMAGE = 0.531; // position de la tête dans les images de marche (fraction de leur largeur)
   var FOULEE = 0.9; // longueur d'une foulée complète (un cycle d'images), en hauteurs de personnage
-  var TETE_M_IMAGE = 0.422; // Marguerite marche vers la gauche : sa tête est à gauche du buste
+  var TETE_M_IMAGE = 0.426; // Marguerite marche vers la gauche : sa tête est à gauche du buste
 
   var borne = function (x) { return Math.max(0, Math.min(1, x)); };
   var lisse = function (a, b, t) { var v = borne((t - a) / (b - a)); return v * v * (3 - 2 * v); };
@@ -90,13 +90,11 @@
     // Images de marche : un cycle complet par foulée parcourue à l'écran, si bien que les pieds ne glissent pas,
     // sur téléphone comme sur grand écran, à l'aller comme au retour.
     var nF = Math.floor(Math.abs(teteF - departF) / (FOULEE * H) * pasF.length) % pasF.length;
-    var nM = Math.floor(Math.abs(teteM - departM) / (FOULEE * 0.85 * H) * pasM.length) % pasM.length;
+    var nM = Math.floor(Math.abs(teteM - departM) / (FOULEE * 0.927 * H) * pasM.length) % pasM.length;
     if (nF !== imageF) { pasF[imageF].style.opacity = 0; pasF[nF].style.opacity = 1; imageF = nF; }
     if (nM !== imageM) { pasM[imageM].style.opacity = 0; pasM[nM].style.opacity = 1; imageM = nM; }
     fabrice.style.transform = 'translate(' + (teteF - TETE_F_IMAGE * lF) + 'px,' + (-rebond) + 'px) rotate(' + bascule + 'deg)';
-    // Marguerite marche à 85 % de la hauteur de Fabrice (volumes) ; elle retrouve ses 92,7 % pendant le fondu.
-    var echelleM = entre(1, 0.927 / 0.85, lisse(0.52, 0.63, p));
-    marguerite.style.transform = 'translate(' + (teteM - TETE_M_IMAGE * lM) + 'px,' + (-rebond * 0.8) + 'px) rotate(' + (-bascule * 0.7) + 'deg) scale(' + echelleM + ')';
+    marguerite.style.transform = 'translate(' + (teteM - TETE_M_IMAGE * lM) + 'px,' + (-rebond * 0.8) + 'px) rotate(' + (-bascule * 0.7) + 'deg)';
 
     // 2. Les deux silhouettes se fondent dans la pose « ensemble » (55 → 66 %), puis dans le cœur (78 → 90 %).
     var seuls = 1 - lisse(0.56, 0.64, p);
