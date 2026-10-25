@@ -90,11 +90,13 @@
     // Images de marche : un cycle complet par foulée parcourue à l'écran, si bien que les pieds ne glissent pas,
     // sur téléphone comme sur grand écran, à l'aller comme au retour.
     var nF = Math.floor(Math.abs(teteF - departF) / (FOULEE * H) * pasF.length) % pasF.length;
-    var nM = Math.floor(Math.abs(teteM - departM) / (FOULEE * 0.927 * H) * pasM.length) % pasM.length;
+    var nM = Math.floor(Math.abs(teteM - departM) / (FOULEE * 0.85 * H) * pasM.length) % pasM.length;
     if (nF !== imageF) { pasF[imageF].style.opacity = 0; pasF[nF].style.opacity = 1; imageF = nF; }
     if (nM !== imageM) { pasM[imageM].style.opacity = 0; pasM[nM].style.opacity = 1; imageM = nM; }
     fabrice.style.transform = 'translate(' + (teteF - TETE_F_IMAGE * lF) + 'px,' + (-rebond) + 'px) rotate(' + bascule + 'deg)';
-    marguerite.style.transform = 'translate(' + (teteM - TETE_M_IMAGE * lM) + 'px,' + (-rebond * 0.8) + 'px) rotate(' + (-bascule * 0.7) + 'deg)';
+    // Marguerite marche à 85 % de la hauteur de Fabrice (volumes) ; elle retrouve ses 92,7 % pendant le fondu.
+    var echelleM = entre(1, 0.927 / 0.85, lisse(0.52, 0.63, p));
+    marguerite.style.transform = 'translate(' + (teteM - TETE_M_IMAGE * lM) + 'px,' + (-rebond * 0.8) + 'px) rotate(' + (-bascule * 0.7) + 'deg) scale(' + echelleM + ')';
 
     // 2. Les deux silhouettes se fondent dans la pose « ensemble » (55 → 66 %), puis dans le cœur (78 → 90 %).
     var seuls = 1 - lisse(0.56, 0.64, p);
