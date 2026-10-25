@@ -13,6 +13,47 @@
   if (!anime) html.classList.remove('anim');
   window.__animationsPretes = true;
 
+  /* ------------------------------------------------------------------ Position au rechargement */
+  // Après un rechargement, on revient là où l'on était. Les navigateurs le font d'ordinaire seuls, mais Safari et
+  // Firefox ratent ce retour avec le défilement doux (scroll-behavior: smooth) et la section « Notre rencontre »
+  // allongée par son script : le visiteur se retrouvait en haut de l'accueil.
+  try {
+    var CLE_POSITION = 'position-mariage';
+    var arrivee = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+    var recharge = arrivee ? arrivee.type === 'reload' : (performance.navigation && performance.navigation.type === 1);
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var noter = function () { try { sessionStorage.setItem(CLE_POSITION, String(Math.round(window.scrollY))); } catch (e) { /* stockage refusé */ } };
+    var attente;
+    window.addEventListener('scroll', function () { clearTimeout(attente); attente = setTimeout(noter, 150); }, { passive: true });
+    window.addEventListener('pagehide', noter);
+    var memoire = recharge ? parseInt(sessionStorage.getItem(CLE_POSITION), 10) : NaN;
+    if (memoire > 0) {
+      var revenir = function () {
+        var doux = html.style.scrollBehavior;
+        html.style.scrollBehavior = 'auto'; // saut immédiat, sans la glissade du défilement doux
+        window.scrollTo(0, memoire);
+        html.style.scrollBehavior = doux;
+      };
+      revenir();
+      // Puis encore une fois quand images et polices sont chargées (la page a pu s'allonger), et après le recalcul
+      // de ScrollTrigger, qui sinon remet la position qu'il avait notée avant la fin du chargement. Sauf si le
+      // visiteur a déjà commencé à défiler lui-même.
+      var bouge = false;
+      ['wheel', 'touchstart', 'keydown'].forEach(function (t) {
+        window.addEventListener(t, function () { bouge = true; }, { once: true, passive: true });
+      });
+      var revenirSiCalme = function () { if (!bouge) revenir(); };
+      window.addEventListener('load', function () {
+        setTimeout(revenirSiCalme, 60);
+        setTimeout(revenirSiCalme, 500);
+      }, { once: true });
+      if (gsapOk) {
+        window.ScrollTrigger.addEventListener('refresh', revenirSiCalme);
+        setTimeout(function () { window.ScrollTrigger.removeEventListener('refresh', revenirSiCalme); }, 5000);
+      }
+    }
+  } catch (e) { /* navigateur ancien : on laisse faire le navigateur */ }
+
   /* ------------------------------------------------------------------ Navigation */
   var nav = $('[data-nav]');
   function majNav() { nav.classList.toggle('nav--fond', window.scrollY > 60); }
@@ -179,10 +220,12 @@
       regime: presence === 'oui' ? form.elements.regime.value.trim() : '',
       message: form.elements.message.value.trim(),
       contact: form.elements.contact.value.trim(),
-      site_web: form.elements.site_web.value, t: parseInt(form.elements.t.value, 10) || 0
+      site_web: form.elements.site_web.value, t: parseInt(form.elements.t.value, 10) || 0,
+      langue: window.LANGUE ? window.LANGUE() : 'fr'
     };
     chargement(true);
-    fetch(api, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(donnees) })
+    // Corps JSON envoyé en texte brut : requête « simple », sans prévol CORS (exigé par Google Apps Script).
+    fetch(api, { method: 'POST', headers: { Accept: 'application/json' }, body: JSON.stringify(donnees) })
       .then(function (r) { return r.json().then(function (j) { return { statut: r.status, corps: j }; }); })
       .then(function (res) {
         chargement(false);
