@@ -53,7 +53,7 @@
   var HAUTEUR_M = 0.927; // Marguerite mesure 92,7 % de la hauteur de Fabrice
   var TETE_F_IMAGE = 0.531; // position de la tête dans les images de marche (fraction de leur largeur)
   var FOULEE = 0.9; // longueur d'une foulée complète (un cycle d'images), en hauteurs de personnage
-  var TETE_M_IMAGE = 0.426; // Marguerite marche vers la gauche : sa tête est à gauche du buste
+  var TETE_M_IMAGE = 0.444; // Marguerite marche vers la gauche : sa tête est à gauche du buste
 
   var borne = function (x) { return Math.max(0, Math.min(1, x)); };
   var lisse = function (a, b, t) { var v = borne((t - a) / (b - a)); return v * v * (3 - 2 * v); };
