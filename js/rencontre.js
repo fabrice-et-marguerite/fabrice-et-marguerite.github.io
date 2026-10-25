@@ -80,8 +80,23 @@
     var lM = marguerite.offsetWidth;
     var departF = -(1 - TETE_F_IMAGE) * lF - 4;
     var departM = largeur + TETE_M_IMAGE * lM + 4;
-    var teteF = entre(departF, cx + (TETE_F_ENSEMBLE + ECART_F * rapproche) * H, marche);
-    var teteM = entre(departM, cx + (TETE_M_ENSEMBLE + ECART_M * rapproche) * H, marche);
+    // Arrivée : le couple qui marche (enjambée de Fabrice + sari de Marguerite) doit tenir dans l'écran et y être
+    // centré. Sur un écran étroit, on resserre l'écart entre eux (jusqu'à se chevaucher un peu), puis on centre la paire.
+    var ecartF = ECART_F;
+    var ecartM = ECART_M;
+    var largeurPaire = TETE_F_IMAGE * lF + (1 - TETE_M_IMAGE) * lM + (TETE_M_ENSEMBLE + ecartM - TETE_F_ENSEMBLE - ecartF) * H;
+    var trop = largeurPaire - 0.96 * largeur;
+    if (trop > 0) {
+      var serre = Math.min(trop / H / 2, 0.12);
+      ecartF += serre;
+      ecartM -= serre;
+    }
+    var finF = cx + (TETE_F_ENSEMBLE + ecartF) * H;
+    var finM = cx + (TETE_M_ENSEMBLE + ecartM) * H;
+    var decale = cx - ((finF - TETE_F_IMAGE * lF) + (finM + (1 - TETE_M_IMAGE) * lM)) / 2;
+    // Pendant le fondu (rapproche → 0), ils glissent jusqu'à leur place exacte dans la pose « ensemble ».
+    var teteF = entre(departF, cx + TETE_F_ENSEMBLE * H + (finF + decale - cx - TETE_F_ENSEMBLE * H) * rapproche, marche);
+    var teteM = entre(departM, cx + TETE_M_ENSEMBLE * H + (finM + decale - cx - TETE_M_ENSEMBLE * H) * rapproche, marche);
     // Huit foulées sur tout le trajet : la phase suit la distance parcourue, donc les pas « collent » au sol.
     var pas = Math.sin(marche * 12 * Math.PI);
     var force = Math.min(1, 4 * (1 - marche)) * Math.min(1, avance * 8);

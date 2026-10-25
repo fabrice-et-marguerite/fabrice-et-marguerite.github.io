@@ -355,7 +355,7 @@ body.menu-ouvert { overflow: hidden; }
    la section tient en un écran et montre la pose du cœur ; avec le script (.rencontre--active), elle s'allonge
    et la scène reste collée en haut pendant que les mariés avancent l'un vers l'autre. */
 .rencontre {
-  --h: min(58svh, 520px);
+  --h: min(58svh, 520px, 112vw); /* 112vw : sur un téléphone étroit, le couple qui marche tient dans l'écran */
   --sol: 11svh;
   position: relative; background: var(--ivoire);
 }
