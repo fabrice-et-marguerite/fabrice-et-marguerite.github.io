@@ -537,6 +537,9 @@ body { font-weight: 500; }
 .fin__citation { font-size: 20px; }
 .fin__familles { font-size: 18px; }
 .pied { font-size: 13px; letter-spacing: .12em; }
+/* Heures du programme : le Bodoni, aux traits très fins, se lisait mal ; police des étiquettes, épaisse et plus grande. */
+.evenement__heure { font-family: var(--f-ui); font-weight: 600; font-size: 30px; letter-spacing: .02em; color: var(--bordeaux); font-variant-numeric: tabular-nums; }
+.compte__nombre { font-weight: 600; }
 
 @media (min-width: 900px) {
   .nav__liens { font-size: 13px; letter-spacing: .1em; }
