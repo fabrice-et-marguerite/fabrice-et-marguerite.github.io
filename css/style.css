@@ -186,7 +186,7 @@ body.menu-ouvert { overflow: hidden; }
 .galerie__mosaique .tirage--gauche { transform: rotate(-3deg); }
 .galerie__mosaique .tirage--gauche img { aspect-ratio: 4 / 5; object-fit: cover; }
 .galerie__tirage-fleurs { margin: 0; }
-.galerie__tirage-fleurs img { aspect-ratio: 379 / 501; object-fit: cover; }
+.galerie__tirage-fleurs img { aspect-ratio: 900 / 1125; object-fit: cover; }
 .galerie__vraie { width: min(84%, 440px); margin: 64px auto 0; text-align: center; }
 .galerie__vraie .tirage { transform: rotate(-1.5deg); }
 .galerie__vraie img { aspect-ratio: 3 / 4; object-fit: cover; }
@@ -401,14 +401,15 @@ body.menu-ouvert { overflow: hidden; }
 .rencontre__duo { left: 50%; transform: translateX(-50%); transform-origin: 50% 100%; will-change: opacity, transform; }
 .rencontre__duo--ensemble { z-index: 4; opacity: 0; }
 .rencontre__duo--coeur { z-index: 5; }
-.rencontre__coeurs { position: absolute; left: 50%; bottom: calc(var(--sol) + var(--h) * .62); width: calc(var(--h) * .6); z-index: 6; }
+.rencontre__coeurs { position: absolute; left: 50%; bottom: calc(var(--sol) + var(--h) * .62); width: calc(var(--h) * .6); z-index: 6; transform: translateX(-50%); }
 .rencontre__petit-coeur { position: absolute; left: calc(50% + var(--x)); top: 0; width: 18px; height: 18px; opacity: 0; }
 .rencontre__petit-coeur:nth-child(2n) { width: 13px; height: 13px; }
-.rencontre__petit-coeur:nth-child(1) { --x: -38%; }
-.rencontre__petit-coeur:nth-child(2) { --x: -12%; }
-.rencontre__petit-coeur:nth-child(3) { --x: 14%; }
-.rencontre__petit-coeur:nth-child(4) { --x: 34%; }
-.rencontre__petit-coeur:nth-child(5) { --x: -26%; }
+/* Cœurs qui s'envolent du geste des mains : sur les côtés, jamais devant les visages (têtes à −0,10 H et +0,09 H du centre). */
+.rencontre__petit-coeur:nth-child(1) { --x: -44%; }
+.rencontre__petit-coeur:nth-child(2) { --x: -36%; }
+.rencontre__petit-coeur:nth-child(3) { --x: 37%; }
+.rencontre__petit-coeur:nth-child(4) { --x: 46%; }
+.rencontre__petit-coeur:nth-child(5) { --x: -40%; }
 .rencontre__petit-coeur svg { display: block; width: 100%; height: 100%; fill: var(--or); }
 /* Autour des mariés (créé par rencontre.js) : halo doré, couronne de cœurs qui flottent, pétales de jasmin.
    Les balancements ne tournent que lorsque la section est visible (.rencontre--reunis / .rencontre--pluie). */
